@@ -51,6 +51,8 @@ Receipt creation uses a database transaction and row lock to allocate a number s
 
 ## Deployment
 
+For a free preview using GitHub, Render, and Neon, follow [DEPLOYMENT.md](DEPLOYMENT.md).
+
 `npm run build` creates the frontend in `dist/`. The included `Dockerfile` runs the API and serves that build from the same origin, which is the recommended Cloud Run setup. Set `DATABASE_URL` and `APP_ORIGIN` (the public HTTPS URL) as service configuration, preferably delivering the database password through Secret Manager. Run `npm run db:migrate` from a trusted administration environment before first use. Configure Cloud SQL connectivity for Cloud Run, backups, and a small connection pool. The API accepts `DB_POOL_MAX` (default `5`). Before opening public registration on the internet, add email verification and abuse controls.
 
 The GitHub Pages workflow still publishes the static frontend. **GitHub Pages cannot run this API or database.** The login will only work when the frontend can reach a deployed API; for the current cookie setup, serve frontend and API from the same origin as in the Cloud Run container. Do not use the Pages build for real donor data by itself.
